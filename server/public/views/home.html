@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/styles/style.css" rel="stylesheet" />
+
+    <script src="vendors/angular/angular.min.js" type="text/javascript"></script>
+    <script src="assets/scripts/client.min.js" type="text/javascript"></script>
+</head>
+<body ng-controller="myController">
+
+<div class="jumbotron">
+    <h1 class="text-center">TO DO</h1>
+</div>
+
+<p>Hello {{user.username}}</p>
+<form>
+    <label for="title">Title:</label>
+    <input ng-model="title" type="text" name="title" id="title"/>
+
+    <label for="description">Description:</label>
+    <input ng-model="description" type="description" name="description" id="description"/>
+
+    <button class="btn btn-default" ng-click="addList(title,description)">Add List</button>
+</form>
+
+<div class="well list" ng-repeat="list in lists">
+  <button ng-click="deleteList(list)" class="close">x</button>
+  <h2>{{list.title}}<br> <small>{{list.description}}</small></h2>
+
+  <ul class="list-group">
+    <li ng-repeat="item in items | filter:{list: list.id}" class="list-group-item" ng-class="{'odd-item':$odd}">
+      <button ng-click="deleteItem(item)" class="close">x</button>
+      <h3>{{item.title}}</h3>
+      <h5>{{item.note}}</h5>
+        {{item.state}}
+    </li>
+  </ul>
+
+  <div>
+    <form>
+      <input type="text" ng-model="newItem.title" placeholder="{{placeholders.title}}"><br>
+      <input type="text" ng-model="newItem.note" placeholder="{{placeholders.note}}"><br>
+      <input type="text" ng-model="newItem.state" placeholder="{{placeholders.state}}"><br>
+      <button class="btn btn-default" ng-click="addNewItem(list, newItem); newItem = null">Add item</button>
+    </form>
+  </div>
+</p>
+
+<!-- error message modal -->
+<div ng-if="errorDisplay" class="overlay"></div>
+<div ng-if="errorDisplay" class="error-box container">
+  <h1>{{error}}</h1>
+  <button class="btn btn-default btn-warning" ng-click="removeErrorDisplay()">Go back</button>
+</div>
+
+</body>
+</html>
