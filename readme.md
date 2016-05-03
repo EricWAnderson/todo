@@ -1,7 +1,6 @@
 # TO DO app
 
-## Instructions
-The objective is to build a basic TO-DO list application.
+## The objective is to build a basic TO-DO list application
 
 Users are identified by email
 
